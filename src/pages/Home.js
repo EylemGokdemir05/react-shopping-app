@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { addToCard } from "../context/action";
 import Card from "../components/Card";
 import ProductList from "../components/ProductList";
+import ProductType from "../components/ProductType";
 
 const Home = (props) => {
   const [items, setItems] = useState(null);
@@ -44,9 +45,8 @@ const Home = (props) => {
 
   return (
     <div className="home">
-      {/* <h3>Home</h3> */}
-      {/* {data && <ProductList items={data} handleAdd={handleAdd} />} */}
-      <ProductList items={data} handleAdd={handleAdd} />
+      <ProductType />
+      {items && <ProductList items={items} handleAdd={handleAdd} />}
     </div>
   );
 };

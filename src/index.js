@@ -13,9 +13,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 const store = setupStore();
 console.log("store: ", store);
 root.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </Provider>
+  // <React.StrictMode>
+  //   <Provider store={store}>
+  //     <App />
+  //   </Provider>
+  // </React.StrictMode>
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );
