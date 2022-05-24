@@ -1,4 +1,5 @@
-import { ADD_QUANTITY, ADD_SHIPPING, ADD_TO_CARD, REMOVE_ITEM, SUB_QUANTITY } from "./cardAction";
+import { GET_ITEMS, ADD_QUANTITY, ADD_SHIPPING, ADD_TO_CARD, REMOVE_ITEM, SUB_QUANTITY } from "./cardAction";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initState = {
   items: [],
@@ -6,7 +7,20 @@ const initState = {
   total: 0,
 };
 
+// const cardReducer = createSlice({
+//   name: "cardReducer",
+//   initState,
+//   reducers: {
+//     getItems: (state, action) => {
+//       state.items = action.payload;
+//     },
+//   },
+// });
+
 const cardReducer = (state = initState, action) => {
+  if (action.type === GET_ITEMS) {
+    return action.payload;
+  }
   if (action.type === ADD_TO_CARD) {
     let addedItem = state.items.find((item) => item.id === action.id);
     let existedItem = state.addedItems.find((item) => action.id === item.id);
