@@ -1,52 +1,63 @@
-/* body {
+@import url("https://fonts.googleapis.com/css?family=Quicksand&display=swap");
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Quicksand";
+  color: #333;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-} */
-
-
-.box{
+.navbar {
+  padding: 20px;
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+  border-bottom: 1px solid #f2f2f2;
 }
-.material-icons{
-  font-size: 2.4em;
-  cursor: pointer;
+
+.navbar h1 {
+  position: absolute;
+  width: 141.25px;
+  height: 40.32px;
+  left: 651.07px;
+  top: 17px;
+
+  color: #ffffff;
+  background-color: #1ea4ce;
 }
-.card{
-  width: 300px;
+
+.navbar .links {
+  margin-left: auto;
 }
-.card .card-image .card-title{
-  color: black;
-  font-weight: 400
+
+.navbar a {
+  margin-left: 16px;
+  text-decoration: none;
+  padding: 6px;
 }
-.cart{
-  margin-top:40px;
+
+.navbar a:hover {
+  color: #f1356d;
 }
-.collection .collection-item{
-  display: flex;
+
+.content {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
 }
-.collection-item.avatar .title {
+
+.item-preview {
+  padding: 10px 16px;
+  margin: 20px 0;
+  border-bottom: 1px solid #fafafa;
+}
+
+.item-preview:hover {
+  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.item-preview h3 {
   font-size: 20px;
-  font-weight: 500;
-  color: #ee6e73;
-  display: block;
-  margin-bottom: 20px;
-  
-}
-.collection .collection-item img{
-  width: 150px;
-  margin-right: 25px;
-}
-.item-desc{
-  align-self:center;
+  color: #1ea4ce;
+  margin-bottom: 8px;
 }

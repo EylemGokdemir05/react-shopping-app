@@ -1,10 +1,26 @@
 import { GET_ITEMS, ADD_QUANTITY, ADD_SHIPPING, ADD_TO_CARD, REMOVE_ITEM, SUB_QUANTITY } from "./cardAction";
 import { createSlice } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { getItems } from "./action";
 
 const initState = {
   items: [],
   addedItems: [],
   total: 0,
+};
+
+const rootReducer = combineReducers({
+  [getItems.reducerPath]: getItems.reducer,
+});
+
+export const setupStore = (preloadedState) => {
+  return configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) =>
+      // adding the api middleware enables caching, invalidation, polling and other features of `rtk-query`
+      getDefaultMiddleware().concat(getItems.middleware),
+    preloadedState,
+  });
 };
 
 // const cardReducer = createSlice({
