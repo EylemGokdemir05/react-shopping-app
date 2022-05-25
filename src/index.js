@@ -8,17 +8,16 @@ import ReduxThunk from "redux-thunk";
 import { createStore, applyMiddleware } from "redux";
 import { BrowserRouter } from "react-router-dom";
 import { setupStore } from "../src/context/reducer";
+import store from "./context/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-const store = setupStore();
-console.log("store: ", store);
 root.render(
-  // <React.StrictMode>
-  //   <Provider store={store}>
-  //     <App />
-  //   </Provider>
-  // </React.StrictMode>
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+      
+    </Provider>
   </React.StrictMode>
 );

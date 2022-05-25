@@ -1,11 +1,14 @@
 import React from "react";
+import { addedItems } from "../context/action";
+import { useDispatch } from "react-redux";
 
-const ProductList = ({ items, handleAdd }) => {
+const ProductList = ({ items }) => {
+  const dispatch = useDispatch();
   return (
-    <div className="product-list">
-      {items.map((item) => {
+    <div style={{ display: "inline-block" }}>
+      {items?.map((item) => {
         return (
-          <div className="item-preview" key={item.id}>
+          <div className="item-preview" key={item.added}>
             {item.itemType === "mug" ? (
               <img src="../assets/mug.png" width="92" height="92"></img>
             ) : (
@@ -13,7 +16,7 @@ const ProductList = ({ items, handleAdd }) => {
             )}
             <p>{item.price}</p>
             <h3>{item.name}</h3>
-            <button onClick={() => handleAdd(item.id)}>Add</button>
+            <button onClick={() => dispatch(addedItems(item))}>Add</button>
           </div>
         );
       })}

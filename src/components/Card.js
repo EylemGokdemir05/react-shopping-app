@@ -1,31 +1,71 @@
 import React from "react";
+import { connect } from "react-redux";
+import { increaseQuantity, decreaseQuantity } from "../context/action";
 
-const Card = ({ items }) => {
+const Card = ({ items, increaseQuantity, decreaseQuantity }) => {
   //   items.map((item) => {
   //     console.log("card item: ", item);
   //   });
+  console.log("card items: ", items);
+  let cardList = [];
+  let total = 0;
+  Object.keys(items.addedProducts).forEach(function (item) {
+    total += items.addedProducts[item].quantity * items.addedProducts[item].price;
+    cardList.push(items.addedProducts[item]);
+  });
+
+  function totalPrice(price, tonggia) {
+    return Number(price * tonggia).toLocaleString("en-US");
+  }
 
   return (
-    <div className="cardContainer">
-      <h3>Card</h3>
-      {items.map((item) => {
-        <div className="card" key={item.added}>
-          <p className="name">{item.added}</p>
-          <p className="name">{item.itemType}</p>
-          {item.itemType === "mug" ? (
-            <img src="../assets/mug.png" width="92" height="92" style={{ backgroundColor: "green" }}></img>
-          ) : (
-            <img src="../assets/shirt.png" width="92" height="92"></img>
-          )}
-          <p className="price">{item.price}</p>
-          <p className="name">{item.name}</p>
-          <p>
-            <button>Add</button>
-          </p>
-        </div>;
-      })}
+    <div className="row">
+      <div className="col-md-12">
+        <table className="table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Image</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cardList.map((item, key) => {
+              return (
+                <tr key={key}>
+                  <td>{item.name}</td>
+                  <td>{item.price}</td>
+                  <td>
+                    <span className="btn btn-primary" style={{ margin: "2px" }} onClick={() => decreaseQuantity(key)}>
+                      -
+                    </span>
+                    <span className="btn btn-info">{item.quantity}</span>
+                    <span className="btn btn-primary" style={{ margin: "2px" }} onClick={() => increaseQuantity(key)}>
+                      +
+                    </span>
+                  </td>
+                  <td>{totalPrice(item.price, item.quantity)}</td>
+                </tr>
+              );
+            })}
+            <tr>
+              <td>{Number(total).toLocaleString("en-US")} $</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
 
-export default Card;
+const mapStateToProps = state =>{
+  console.log('state:',state)
+    return{
+        items:state.items
+    }
+}
+
+export default connect(mapStateToProps,{increaseQuantity,decreaseQuantity})(Card);

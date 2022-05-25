@@ -1,68 +1,38 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { addToCard } from "../context/action";
+import { addedItems, loadItems } from "../context/action";
 import Card from "../components/Card";
 import ProductList from "../components/ProductList";
 import ProductType from "../components/ProductType";
+import Pagination from "../components/Pagination";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate} from "react-router-dom";
 
 const Home = (props) => {
-  const [items, setItems] = useState(null);
-  const [data, setData] = useState([
-    {
-      id: 1,
-      price: 16.99,
-      name: "Practical Fog Shirt",
-    },
-    {
-      id: 2,
-      price: 15.99,
-      name: "Unbranded Animal Shirt",
-    },
-    {
-      id: 3,
-      price: 20.99,
-      name: "Handmade Fog Shirt",
-    },
-  ]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemPerPage, setItemPerPage] = useState(16);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { items } = useSelector((state) => state.items);
   useEffect(() => {
     console.log("anasayfadayız!!!");
-    fetch("http://localhost:8000/items")
-      .then((response) => {
-        console.log("response: ", response);
-        return response.json();
-      })
-      .then((data) => {
-        console.log("data: ", data);
-        setItems(data);
-      });
+    dispatch(loadItems());
   }, []);
 
-  const handleAdd = (id) => {
-    console.log("id: ", id);
-    const newItems = data.filter((item) => item.id !== id);
-    setData(newItems);
-  };
+  const lastProductIndex = currentPage * itemPerPage;
+  const firstProductIndex = lastProductIndex - itemPerPage;
+  const currentProducts = items.slice(firstProductIndex, lastProductIndex);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="home">
+      <button onClick={() => navigate('/card')}>Card</button>
       <ProductType />
-      {items && <ProductList items={items} handleAdd={handleAdd} />}
+      {items && <ProductList items={currentProducts} />}
+      <Pagination itemPerPage={itemPerPage} totalItems={items.length} paginate={paginate} />
     </div>
   );
 };
-
-// const mapStateToProps = (state) => {
-//   return {
-//     items: state.items,
-//   };
-// };
-
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         addToCard: (id) => {dispatch(addToCard(id))}
-//     }
-// }
-
-// export default connect(mapStateToProps, { getItems })(Home);
 
 export default Home;
