@@ -7,18 +7,8 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <h1>Navbar</h1>
-      <div className="links">
-        <a href="/">Home</a>
-        <a
-          href="/card"
-          style={{
-            color: "white",
-            backgroundColor: "#f1356d",
-            borderRadius: "6px",
-          }}
-        >
-          Basket
-        </a>
+      <div className="basket">
+        <p>₺ 39,97</p>
       </div>
     </nav>
   );

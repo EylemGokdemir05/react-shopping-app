@@ -6,7 +6,7 @@ import ProductList from "../components/ProductList";
 import ProductType from "../components/ProductType";
 import Pagination from "../components/Pagination";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Home = (props) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,7 +27,9 @@ const Home = (props) => {
 
   return (
     <div className="home">
-      <button onClick={() => navigate('/card')}>Card</button>
+      <button onClick={() => navigate("/card")} style={{ width: "70px" }}>
+        Card
+      </button>
       <ProductType />
       {items && <ProductList items={currentProducts} />}
       <Pagination itemPerPage={itemPerPage} totalItems={items.length} paginate={paginate} />

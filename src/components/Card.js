@@ -35,24 +35,48 @@ const Card = ({ items, increaseQuantity, decreaseQuantity }) => {
           <tbody>
             {cardList.map((item, key) => {
               return (
-                <tr key={key}>
-                  <td>{item.name}</td>
-                  <td>{item.price}</td>
-                  <td>
-                    <span className="btn btn-primary" style={{ margin: "2px" }} onClick={() => decreaseQuantity(key)}>
+                <tr key={key} style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <td>{item.name}</td>
+                    <td>{item.price}</td>
+                  </div>
+
+                  <td style={{ width: "74px", height: "32.7px", display: "flex", justifyContent: "space-between" }}>
+                    <span
+                      className="btn btn-primary"
+                      style={{ margin: "2px", color: "#1EA4CE" }}
+                      onClick={() => decreaseQuantity(key)}
+                    >
                       -
                     </span>
-                    <span className="btn btn-info">{item.quantity}</span>
-                    <span className="btn btn-primary" style={{ margin: "2px" }} onClick={() => increaseQuantity(key)}>
+                    <span
+                      className="btn btn-info"
+                      style={{
+                        color: "white",
+                        backgroundColor: "#1EA4CE",
+                        borderRadius: "6px",
+                        width: "30px",
+                        height: "21.46px",
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {item.quantity}
+                    </span>
+                    <span
+                      className="btn btn-primary"
+                      style={{ margin: "2px", color: "#1EA4CE" }}
+                      onClick={() => increaseQuantity(key)}
+                    >
                       +
                     </span>
                   </td>
-                  <td>{totalPrice(item.price, item.quantity)}</td>
+                  {/* <td>{totalPrice(item.price, item.quantity)}</td> */}
                 </tr>
               );
             })}
             <tr>
-              <td>{Number(total).toLocaleString("en-US")} $</td>
+              <td>{Number(total).toLocaleString("en-US")} ₺</td>
             </tr>
           </tbody>
         </table>
@@ -61,11 +85,11 @@ const Card = ({ items, increaseQuantity, decreaseQuantity }) => {
   );
 };
 
-const mapStateToProps = state =>{
-  console.log('state:',state)
-    return{
-        items:state.items
-    }
-}
+const mapStateToProps = (state) => {
+  console.log("state:", state);
+  return {
+    items: state.items,
+  };
+};
 
-export default connect(mapStateToProps,{increaseQuantity,decreaseQuantity})(Card);
+export default connect(mapStateToProps, { increaseQuantity, decreaseQuantity })(Card);

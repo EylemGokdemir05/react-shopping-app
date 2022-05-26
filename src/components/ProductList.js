@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 const ProductList = ({ items }) => {
   const dispatch = useDispatch();
   return (
-    <div style={{ display: "inline-block" }}>
+    <div style={{ display: "flex", flexWrap: "wrap" }}>
       {items?.map((item) => {
         return (
           <div className="item-preview" key={item.added}>
