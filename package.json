@@ -47,6 +47,7 @@
     ]
   },
   "devDependencies": {
-    "jest": "^28.1.0"
+    "jest": "^28.1.0",
+    "react-styleguidist": "^11.2.0"
   }
 }

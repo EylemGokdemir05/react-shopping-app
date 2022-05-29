@@ -1,10 +1,5 @@
 import React, { useState, useEffect, useReducer, useRef } from "react";
-import { connect } from "react-redux";
-import { addedItems, loadItems, loadBrands } from "../context/action";
 import Card from "../components/Card";
-import ProductList from "../components/ProductList";
-import ProductType from "../components/ProductType";
-import Pagination from "../components/Pagination";
 import Filter from "../components/Filter";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -19,21 +14,12 @@ const Home = (props) => {
   const [searchValue, setSearchValue] = useState("");
   const [searchTagValue, setSearchTagValue] = useState("");
   var sortedList = [];
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { items } = useSelector((state) => state.items);
   const search = useRef(searchValue);
   const searchTag = useRef(searchTagValue);
-  console.log("brands: ", brands);
   var tags = items.map((item) => {
     return item.tags;
   });
-
-  console.log('item tags: ',tags)
-  // useEffect(() => {
-  //   dispatch(loadItems());
-  //   dispatch(loadBrands());
-  // }, []);
 
   const lastProductIndex = currentPage * itemPerPage;
   const firstProductIndex = lastProductIndex - itemPerPage;
@@ -125,6 +111,20 @@ const Home = (props) => {
                 Price high to low
               </label>
             </div>
+
+            <div className="radio">
+              <input id="radio-3" name="radio" type="radio"></input>
+              <label htmlFor="radio-2" className="radio-label">
+                New to old
+              </label>
+            </div>
+
+            <div className="radio">
+              <input id="radio-4" name="radio" type="radio"></input>
+              <label htmlFor="radio-2" className="radio-label">
+                Old to new
+              </label>
+            </div>
           </div>
 
           <div className="selectBoxGroup underneath">
@@ -183,13 +183,11 @@ const Home = (props) => {
         <div style={{ width: "60%", marginLeft: "12px" }}>
           <p style={{ colo2: "#6F6F6F", fontSize: "20px", marginLeft: "8rem", marginTop: "1rem" }}>Products</p>
           <Tabs />
-          {/* <ProductType />
-          <div className="products">{items && <ProductList items={currentProducts} />}</div> */}
         </div>
         <div style={{ width: "20%", marginRight: "18px", marginTop: "10px" }}>{items && <Card />}</div>
       </div>
 
-      <Pagination itemPerPage={itemPerPage} totalItems={items.length} paginate={paginate} />
+      
     </div>
   );
 };
