@@ -9,6 +9,7 @@ import Filter from "../components/Filter";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import brands from "../api/companies.json";
+import Tabs from "../components/Tabs";
 
 const Home = (props) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,19 +17,23 @@ const Home = (props) => {
   const [selectedItems, setSelectedItems] = useState([]);
   const [isSorted, setIsSorted] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [searchTagValue, setSearchTagValue] = useState("");
   var sortedList = [];
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { items } = useSelector((state) => state.items);
   const search = useRef(searchValue);
+  const searchTag = useRef(searchTagValue);
   console.log("brands: ", brands);
-  const tags = items.map((item) => {
+  var tags = items.map((item) => {
     return item.tags;
   });
-  useEffect(() => {
-    dispatch(loadItems());
-    dispatch(loadBrands());
-  }, []);
+
+  console.log('item tags: ',tags)
+  // useEffect(() => {
+  //   dispatch(loadItems());
+  //   dispatch(loadBrands());
+  // }, []);
 
   const lastProductIndex = currentPage * itemPerPage;
   const firstProductIndex = lastProductIndex - itemPerPage;
@@ -63,7 +68,6 @@ const Home = (props) => {
   };
 
   const sortByPriceLowToHigh = () => {
-
     sortedList = items.sort((a, b) => (a.price > b.price ? 1 : -1));
     setIsSorted(true);
     return sortedList;
@@ -80,7 +84,19 @@ const Home = (props) => {
     setSearchValue(event.target.value);
     if (value.length > 0) {
       brands = brands.filter(function (brand) {
+        console.log('filter brand: ',brand.name)
         return brand.name.toLowerCase().match(value);
+      });
+    }
+  };
+
+  const handleSearchTag = (event) => {
+    let value = searchTagValue.trim().toLowerCase();
+    setSearchTagValue(event.target.value);
+    if (value.length > 0) {
+      tags = tags.filter(function (tag) {
+        console.log('filter tag: ',tag.toString())
+        return tag.toString().toLowerCase().match(value);
       });
     }
   };
@@ -137,10 +153,38 @@ const Home = (props) => {
               );
             })}
           </div>
+          <div className="selectBoxGroup underneath">
+            <p style={{ marginLeft: "15px", marginTop: "10px" }}>Tags</p>
+            <input
+              type="text"
+              value={searchTagValue}
+              ref={searchTag}
+              onChange={handleSearchTag}
+              placeholder="Search tag"
+              style={{
+                width: "248px",
+                height: "36px",
+                marginLeft: "16px",
+                borderRadius: "4px",
+                marginTop: "10px",
+                border: "1px solid lightgrey",
+              }}
+            />
+            {tags.map((tag) => {
+              return (
+                <div className="selectBox">
+                  <input type="checkbox" name="chk" id="chk-u-1"></input>
+                  <label htmlFor="chk-u-1">{tag}</label>
+                </div>
+              );
+            })}
+          </div>
         </div>
         <div style={{ width: "60%", marginLeft: "12px" }}>
-          <ProductType />
-          <div className="products">{items && <ProductList items={currentProducts} />}</div>
+          <p style={{ colo2: "#6F6F6F", fontSize: "20px", marginLeft: "8rem", marginTop: "1rem" }}>Products</p>
+          <Tabs />
+          {/* <ProductType />
+          <div className="products">{items && <ProductList items={currentProducts} />}</div> */}
         </div>
         <div style={{ width: "20%", marginRight: "18px", marginTop: "10px" }}>{items && <Card />}</div>
       </div>
