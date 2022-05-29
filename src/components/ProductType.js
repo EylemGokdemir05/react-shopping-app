@@ -3,8 +3,8 @@ const ProductType = () => {
   return (
     <nav className="productType">
       <div className="links">
-        <a href="/mug">Mug</a>
-        <a href="/shirt">Shirt</a>
+        <button>Mug</button>
+        <button>Shirt</button>
       </div>
     </nav>
   );

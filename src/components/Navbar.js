@@ -1,17 +1,28 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { BrowserRouter as Router, Routes, Route, useRoutes } from "react-router-dom";
-import Home from "../pages/Home";
-import Card from "./Card";
-const Navbar = () => {
+import { connect } from "react-redux";
+const Navbar = (props) => {
+  let total = 0;
+  Object.keys(props.items.addedProducts).forEach(function (item) {
+    total += props.items.addedProducts[item].quantity * props.items.addedProducts[item].price;
+  });
   return (
     <nav className="navbar">
-      <h1>Navbar</h1>
-      <div className="basket">
-        <p>₺ 39,97</p>
-      </div>
+      <>
+        <h1 style={{ fontFamily: "cursive" }}>market</h1>
+        <div className="basket">
+          <img src={require('../assets/shopping-bag.png')} width="24" height="24" style={{ marginLeft: "2px", marginTop: "25px" }}></img>
+          <p style={{ marginLeft: "42px", marginTop: "-24px" }}>₺ {Number(total).toLocaleString("en-US")}</p>
+        </div>
+      </>
     </nav>
   );
 };
 
-export default Navbar;
+const mapStateToProps = (state) => {
+  return {
+    items: state.items,
+    total: state.total,
+  };
+};
+
+export default connect(mapStateToProps, null)(Navbar);

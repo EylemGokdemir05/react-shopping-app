@@ -6,6 +6,11 @@ const getItems = (items) => ({
   payload: items,
 });
 
+const getBrands = (brands) => ({
+  type: types.GET_BRANDS,
+  payload: brands,
+});
+
 export function addedItems(payload) {
   return {
     type: types.ADD_TO_CARD,
@@ -31,9 +36,19 @@ export const loadItems = () => {
     axios
       .get(`${process.env.REACT_APP_API}`)
       .then((response) => {
-        console.log("ALL response: ", response);
         dispatch(getItems(response.data));
       })
-      .catch((error) => console.log('error',error));
+      .catch((error) => error);
+  };
+};
+
+export const loadBrands = () => {
+  return function (dispatch) {
+    axios
+    .get(`${process.env.REACT_BRANDS_API}`)
+    .then((response) => {
+      dispatch(getBrands(response.data));
+    })
+    .catch((error) => error);
   };
 };

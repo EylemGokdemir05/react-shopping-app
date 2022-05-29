@@ -3,10 +3,6 @@ import { connect } from "react-redux";
 import { increaseQuantity, decreaseQuantity } from "../context/action";
 
 const Card = ({ items, increaseQuantity, decreaseQuantity }) => {
-  //   items.map((item) => {
-  //     console.log("card item: ", item);
-  //   });
-  console.log("card items: ", items);
   let cardList = [];
   let total = 0;
   Object.keys(items.addedProducts).forEach(function (item) {
@@ -20,18 +16,8 @@ const Card = ({ items, increaseQuantity, decreaseQuantity }) => {
 
   return (
     <div className="row">
-      <div className="col-md-12">
+      <div>
         <table className="table">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Image</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Total Price</th>
-            </tr>
-          </thead>
           <tbody>
             {cardList.map((item, key) => {
               return (
@@ -71,7 +57,6 @@ const Card = ({ items, increaseQuantity, decreaseQuantity }) => {
                       +
                     </span>
                   </td>
-                  {/* <td>{totalPrice(item.price, item.quantity)}</td> */}
                 </tr>
               );
             })}
@@ -86,7 +71,6 @@ const Card = ({ items, increaseQuantity, decreaseQuantity }) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log("state:", state);
   return {
     items: state.items,
   };
