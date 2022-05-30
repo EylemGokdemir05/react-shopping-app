@@ -6,6 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Before  Run
 
+### `npm install`
 ### `npx json-server --watch data/db.json -p 8000`
 
 In the project directory, you can run:
@@ -23,6 +24,9 @@ you can run:
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
+## Demo Link:
+
+[https://6293d2e5b669220b3dc923d7--eylemshoppingmarket05.netlify.app/](https://6293d2e5b669220b3dc923d7--eylemshoppingmarket05.netlify.app/)
 
 ### `npm test`
 
