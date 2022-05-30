@@ -28,6 +28,10 @@ You may also see any lint errors in the console.
 
 [https://6293d2e5b669220b3dc923d7--eylemshoppingmarket05.netlify.app/](https://6293d2e5b669220b3dc923d7--eylemshoppingmarket05.netlify.app/)
 
+## UI Design
+
+![alt text](https://github.com/EylemGokdemir05/react-shopping-app/blob/dev/shopping.jpeg)
+
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\
